@@ -1,20 +1,28 @@
 package br.com.tasks.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Entity
 @Table(name = "tasks")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     @Column(nullable = false)
-    public String title;
+    private String title;
 
-    public String description;
+    private String description;
 
     @Column(nullable = false)
-    public boolean done = false;
+    private boolean done = false;
 }

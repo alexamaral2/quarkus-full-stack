@@ -32,9 +32,9 @@ public class TaskService {
     @Transactional
     public Task create(TaskRequest request) {
         Task task = new Task();
-        task.title = request.title;
-        task.description = request.description;
-        task.done = request.done != null ? request.done : false;
+        task.setTitle(request.title);
+        task.setDescription(request.description);
+        task.setDone(request.done != null ? request.done : false);
 
         repository.persist(task);
         return task;
@@ -44,11 +44,11 @@ public class TaskService {
     public Task update(Long id, TaskRequest request) {
         Task task = getById(id);
 
-        task.title = request.title;
-        task.description = request.description;
+        task.setTitle(request.title);
+        task.setDescription(request.description);
 
         if (request.done != null)
-            task.done = request.done;
+            task.setDone(request.done);
 
         return task;
     }

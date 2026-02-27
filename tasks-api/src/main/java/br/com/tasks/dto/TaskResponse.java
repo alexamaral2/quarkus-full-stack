@@ -11,10 +11,10 @@ public class TaskResponse {
 
     public static TaskResponse from(Task task) {
         TaskResponse r = new TaskResponse();
-        r.id = task.id;
-        r.title = task.title;
-        r.description = task.description;
-        r.done = task.done;
+        r.id = task.getId();
+        r.title = task.getTitle();
+        r.description = task.getDescription();
+        r.done = task.isDone();
         return r;
     }
 }

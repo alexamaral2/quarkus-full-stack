@@ -20,7 +20,13 @@ services:
     build:
       context: ./tasks-api
       dockerfile: Dockerfile
+      target: dev
     container_name: tasks-api
+    working_dir: /work
+    volumes:
+      - ./tasks-api:/work
+      - ~/.m2:/root/.m2
+    command: ./mvnw quarkus:dev -Dquarkus.http.host=0.0.0.0
     depends_on:
       db:
         condition: service_healthy
@@ -30,11 +36,18 @@ services:
       QUARKUS_DATASOURCE_PASSWORD: tasks
     ports:
       - "8080:8080"
+      - "5005:5005"
+
   web:
     build:
       context: ./tasks-web
       dockerfile: Dockerfile
     container_name: tasks-web
+    volumes:
+      - ./tasks-web:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     depends_on:
       - api
     ports:
